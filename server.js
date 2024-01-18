@@ -1,11 +1,13 @@
 import Express from "express";
 import conn from "./db.js";
-import  authRoute  from "./routes/authRoute.js";
+import authRoute from "./routes/authRoute.js";
 
 const app = Express();
 app.get("/", (req, res) => {
   res.send("<h1>Welcome</h1>");
 });
+
+app.use(Express.json());
 
 app.use("/api/v1/auth", authRoute);
 
