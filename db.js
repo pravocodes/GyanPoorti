@@ -3,12 +3,10 @@ import colors from "colors";
 
 const conn = async () => {
   try {
-    const isconnected = await mongoose.connect(
-      "mongodb+srv://SimpleGyan:SimpleGyan123@cluster0.ghmq5p1.mongodb.net/SimpleGyan/"
-    );
-    console.log("Successfully connected to the database".bgGreen.white);
+    const isconnected = await mongoose.connect(process.env.MONGOURI);
+    console.log("Successfully connected to the database".bgGreen);
   } catch (error) {
-    console.log(error.bgRed.white);
+    console.log(error.bgRed);
   }
 };
 
