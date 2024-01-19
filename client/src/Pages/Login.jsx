@@ -1,11 +1,12 @@
 import React from 'react'
-import "./styles.css"
+import styles from "./Login.module.css";
 
 const Login = () => {
+  console.log(styles.container);
   return (
     <>
     {/* <img src="./wave.png"></img> */}
-    <div className="login-container">
+    <div className={styles.container}>
       <img src="https://i.postimg.cc/zX8Zbg5P/avatar.png" alt="" />
       <form action='#'>
        {/* <label for="username">Username: </label> */}

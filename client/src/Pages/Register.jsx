@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+// import "./styles.css";
 
 //firstname /lastname/ phone number /nationality/ email /password
 const Register = () => {
