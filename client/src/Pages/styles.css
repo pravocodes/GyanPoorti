@@ -1,0 +1,121 @@
+/*********************************************************** LOGIN ***************************************************/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 100px;
+    /* background: url("wave.png"); */
+    background-image: url("https://i.postimg.cc/0QRyKyV5/wave.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100% 100%;
+    
+}
+
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1 {
+    margin-bottom: 40px;
+}
+
+.login-container img{
+    height: 120px;
+    /* width: 100px; */
+    margin-bottom: 20px;
+}
+.login-container input {
+    height: 35px;
+    width: 75%;
+    padding: 10px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container a{
+    text-align: left;
+    display: flex;
+    margin:10px 0 15px 50px;
+}
+
+.login-container button {
+    background-color: #51c780;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: right;
+}
+
+.login-container button:hover {
+    background-color: #45a049;
+}
+
+
+/*********************************** REGISTER PAGE ****************************/
+.register-container {
+    max-width: 500px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h2 {
+    margin-bottom: 20px;
+}
+
+.register-container input {
+    height: 35px;
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.register-container button {
+    background-color: #51c780;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.register-container button:hover {
+    background-color: #45a049;
+}
+
+.register-container p{
+    text-align: left;
+    margin: 5px 0 5px 15px;
+    font-size: 14px;
+    color: #938f8f;
+}
+
+.register-container select{
+    width: 95%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    height: 35px;
+    border-radius: 4px;
+}
+
+.register-container option{
+    width: 95%;
+    font-size: 14px;
+    color: #938f8f;
+}
