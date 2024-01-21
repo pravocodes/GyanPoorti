@@ -17,6 +17,12 @@ const UserModel = new mongoose.Schema({
     Nationality : {
         type:String,
     },
+    otp:{
+        type: Number
+    },
+    isVerified:{
+        type:Boolean
+    },
     Email : {
         type:String,
         lowercase:true,
