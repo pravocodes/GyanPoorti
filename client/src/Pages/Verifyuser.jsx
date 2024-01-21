@@ -2,41 +2,81 @@ import React from 'react'
 import styles from "./Verifyuser.module.css";
 // import Register from './Register';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+
+
 
 function Verifyuser() {
+  const location = useLocation();
+  const { phone, email } = location.state;
+const [PhoneNumber,setPhoneNumber]=useState(phone);
+const [Email,setEmail]=useState(email);
+const [Numberotp,setNumberotp]=useState("");
+const [Emailotp,setEmailotp]=useState("");
+
     const [showOTPInputnum, setShowOTPInputnum] = useState(false);
-    const enterOTPnum = () => {
-        setShowOTPInputnum(true);
+    const enterOTPnum = async (e) => {
+      e.preventDefault();
+      try {
+        const res=await axios.post("/api/v1/auth/sendotp",{
+          PhoneNumber,
+        })
+        if(res && res.data && res.data.success){
+          alert('OTP sent to your number');
+          setShowOTPInputnum(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
       };
-      const handleSubmitOTPnum = () => {
+
+      const handleSubmitOTPnum = async (e) => {
+        e.preventDefault();
+        const requestData={
+          PhoneNumber: PhoneNumber,
+          OTP: Numberotp,
+        }
+        try {
+          console.log(PhoneNumber,Numberotp);
+          const res=await axios.post("/api/v1/auth/verifyotp",requestData)
+          if(res && res.data && res.data.success){
+            alert('OTP verified');
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        
         console.log('OTP submitted');
       };
 
       const [showOTPInput, setShowOTPInput] = useState(false);
-      const enterOTP = () => {
+      const enterOTP =  async (e) => {
+        e.preventDefault();
           setShowOTPInput(true);
         };
-        const handleSubmitOTP = () => {
+        const handleSubmitOTP =async (e) => {
+          e.preventDefault();
           console.log('OTP submitted');
         };
 
   return (
     <div className={styles.verifyusercontainer}>
       <h1>Verify Yourself !</h1>
-      <input type="text" placeholder='Phone Number' />
-      <button type='text' onClick={enterOTPnum}>Send Otp</button>
+      <input type="text" placeholder='Phone Number' value={PhoneNumber} />
+      <button type='text' onClick={enterOTPnum} >Send Otp</button>
       {showOTPInputnum && (
           <div>
-            <input type="text" name="otp" placeholder="Enter OTP" required />
+            <input type="text" name="otp" placeholder="Enter OTP" value={Numberotp} onChange={(e)=>setNumberotp(e.target.value)} required />
             <button type="button" onClick={handleSubmitOTPnum}>Submit OTP</button>
           </div>
         )}
 
-<input type="text" placeholder='Email' />
+<input type="text" placeholder='Email' value={Email} />
       <button type='text' onClick={enterOTP}>Send Otp</button>
       {showOTPInput && (
           <div>
-            <input type="text" name="otp" placeholder="Enter OTP" required />
+            <input type="text" name="otp" placeholder="Enter OTP" value={Emailotp} onChange={(e)=>setEmailotp(e.target.value)} required />
             <button type="button" onClick={handleSubmitOTP}>Submit OTP</button>
           </div>
         )}

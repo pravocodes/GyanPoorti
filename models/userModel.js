@@ -30,6 +30,10 @@ const UserModel = new mongoose.Schema(
     isEmailVerified: {
       type: Boolean,
     },
+    Role:{
+      type :String ,
+      required: true,
+    },
     Email: {
       type: String,
       lowercase: true,
