@@ -7,7 +7,7 @@ export const RegisterController = async (req, res) => {
   //firstname //lastname //email //phonenumber //state //country //
 
   try {
-    const { FirstName, LastName, PhoneNumber, Nationality, Email, Password } =
+    const { FirstName, LastName, PhoneNumber, Nationality,Role, Email, Password } =
       req.body;
 
     if (!FirstName || !LastName) {
@@ -19,12 +19,16 @@ export const RegisterController = async (req, res) => {
     if (!Nationality) {
       res.send({ message: "Nationality is Required" });
     }
+    if(!Role){
+      res.send({message: "Role is required"});
+    }
     if (!Email) {
       res.send({ message: "Email is Required" });
     }
     if (!Password) {
       res.send({ message: "Password is Required" });
     }
+    console.log("data fetched")
 
     const ExistingUser = await userModel.findOne({ Email });
     if (ExistingUser) {
@@ -41,6 +45,7 @@ export const RegisterController = async (req, res) => {
       Nationality,
       isNumberVerified: false,
       isEmailVerified: false,
+      Role,
       Email,
       Password: hashPassword,
     }).save();
@@ -67,7 +72,7 @@ export const otpSendController = async (req, res) => {
     message: `Your Otp for GyanPoorti registration is ${otp}`,
     numbers: [PhoneNumber],
   };
-  // console.log(options);
+  console.log(options);
   fast2sms
     .sendMessage(options)
     .then(async (response) => {
@@ -96,8 +101,10 @@ export const VerifyOTPController = async (req, res) => {
   try {
     const { PhoneNumber, OTP } = req.body;
     let user = await userModel.findOne({ PhoneNumber });
+    console.log(PhoneNumber,OTP)
     if (!user || user.otp != OTP) {
-      return res.json({
+
+      return res.send({
         success: false,
         message: "Invalid OTP or User not found",
       });

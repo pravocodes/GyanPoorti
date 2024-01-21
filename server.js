@@ -2,6 +2,9 @@ import Express from "express";
 import conn from "./db.js";
 import dotenv from "dotenv"
 import authRoute from "./routes/authRoute.js";
+import cors from "cors";
+import bodyParser from "body-parser";
+
 
 const app = Express();
 app.get("/", (req, res) => {
@@ -11,7 +14,8 @@ app.get("/", (req, res) => {
 dotenv.config();
 
 app.use(Express.json());
-
+app.use(bodyParser.json());
+app.use(cors());
 app.use("/api/v1/auth", authRoute);
 
 conn();

@@ -1,0 +1,56 @@
+.registercontainer {
+    max-width: 500px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.registercontainer h2 {
+    margin-bottom: 20px;
+}
+
+.registercontainer input {
+    height: 35px;
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.registercontainer button {
+    background-color: #51c780;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.registercontainer button:hover {
+    background-color: #45a049;
+}
+
+.registercontainer p{
+    text-align: left;
+    margin: 5px 0 5px 15px;
+    font-size: 14px;
+    color: #938f8f;
+}
+
+.registercontainer select{
+    width: 95%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    height: 35px;
+    border-radius: 4px;
+}
+
+.registercontainer option{
+    width: 95%;
+    font-size: 14px;
+    color: #938f8f;
+}

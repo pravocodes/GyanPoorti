@@ -6,13 +6,14 @@ import {
 const router = express.Router();
 
 router.post("/register", RegisterController);
+// router.post("/login", LoginController);
 
 router.post("/sendotp",otpSendController)
 
-router.get("/verifyotp", VerifyOTPController );
+router.post("/verifyotp", VerifyOTPController );
 
 router.post("/sendmail", mailSenderController);
 
-router.get("/verifymail",verifyMailController);
+router.post("/verifymail",verifyMailController);
 
 export default router;
