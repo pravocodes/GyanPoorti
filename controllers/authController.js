@@ -105,7 +105,7 @@ export const VerifyOTPController = async (req, res) => {
       user.isNumberVerified = true;
       user.otp = 0;
       user.save();
-      res.json({
+      res.send({
         success: true,
         message: "User verified Successfully",
       });
