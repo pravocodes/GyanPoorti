@@ -1,12 +1,12 @@
 import express from "express";
 import {
-  RegisterController, VerifyOTPController, mailSenderController, otpSendController, verifyMailController,
+  RegisterController, VerifyOTPController, mailSenderController, otpSendController, verifyMailController,LoginController
 } from "../controllers/authController.js";
 
 const router = express.Router();
 
 router.post("/register", RegisterController);
-// router.post("/login", LoginController);
+router.post("/login", LoginController);
 
 router.post("/sendotp",otpSendController)
 
