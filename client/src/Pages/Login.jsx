@@ -15,7 +15,6 @@ const Login = () => {
     try {
       const res= await axios.post("/api/v1/auth/login", {Email,Password});
       if(res && res.data && res.data.success){
-        console.log("in handle submit")
         localStorage.setItem("auth",JSON.stringify(res.data));
         navigate(location.storage || '/home');
       }

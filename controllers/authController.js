@@ -260,3 +260,15 @@ export const LoginController =async (req,res) =>{
     });
   }
 };
+
+
+//Protected Route test
+
+export const testController = (req, res) => {
+  try {
+    res.send("Protected Routes");
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
