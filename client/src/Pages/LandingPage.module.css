@@ -8,3 +8,8 @@
     align-items: right;
     margin: 50px;
 }
+
+.Homecontainer img{
+    height: 100px;
+    width: 100;
+}

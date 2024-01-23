@@ -1,7 +1,8 @@
 import userModel from "../models/userModel.js";
-import { hashedPassword } from "../Helper/authHelper.js";
+import { hashedPassword,comparePassword } from "../Helper/authHelper.js";
 import fast2sms from "fast-two-sms";
 import nodemailer from "nodemailer";
+import  Jwt from "jsonwebtoken";
 
 export const RegisterController = async (req, res) => {
   //firstname //lastname //email //phonenumber //state //country //
@@ -201,6 +202,60 @@ export const verifyMailController = async (req, res) => {
     res.send({
       success: false,
       message: "Error in verifing please try again",
+      error,
+    });
+  }
+};
+
+//LOGIN API**************************************************************
+
+export const LoginController =async (req,res) =>{
+  try {
+    const {Email, Password} = req.body;
+
+    if(!Email || !Password) {
+      return res.status(404).send({
+        success: false,
+        message: 'Invalid Email or Password',
+      });
+    }
+    const user =await userModel.findOne({Email});
+    if(!user){
+      return res.status(404).send({
+        success: false,
+        message: "Email is not registerd",
+      });
+    }
+    const match = await comparePassword(Password, user.Password);
+    if (!match) {
+      return res.status(200).send({
+        success: false,
+        message: "Invalid Password",
+      });
+    }
+    const token = await Jwt.sign({ _id: user._id }, process.env.JWT_SECRETKEY, {
+      expiresIn: "7d",
+    });
+    res.status(200).send({
+      success: true,
+      message: "login successfully",
+      user: {
+        _id: user._id,
+        fname: user.FirstName,
+        lname: user.LastName,
+        phone: user.PhoneNumber,
+        nationality: user.Nationality,
+        role: user.Role,
+        email: user.Email,
+      },
+      token,
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in login",
       error,
     });
   }

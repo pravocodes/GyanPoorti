@@ -8,5 +8,9 @@ export const hashedPassword = async (Password)=>{
     } catch (error) {
         console.log("Error in password hashing",error);
     }
-    
 }
+
+export const comparePassword = async (password, hashedPassword) => {
+    return bcrypt.compare(password, hashedPassword);
+  };
+  
