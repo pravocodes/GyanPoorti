@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import styles from "./Login.module.css";
 import { useNavigate,useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../Context/Auth';
 
 const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const {auth,setAuth} = useAuth();
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -16,6 +18,11 @@ const Login = () => {
       const res= await axios.post("/api/v1/auth/login", {Email,Password});
       if(res && res.data && res.data.success){
         localStorage.setItem("auth",JSON.stringify(res.data));
+        setAuth({
+          ...auth,
+          user:res.data.user,
+          token:res.data.token
+        })
         navigate(location.storage || '/home');
       }
       
