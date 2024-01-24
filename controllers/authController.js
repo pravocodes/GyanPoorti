@@ -15,25 +15,25 @@ export const RegisterController = async (req, res) => {
       return res.send({ message: "Name is Required" });
     }
     if (!PhoneNumber) {
-      res.send({ message: "PhoneNumber is Required" });
+      return res.send({ message: "PhoneNumber is Required" });
     }
     if (!Nationality) {
-      res.send({ message: "Nationality is Required" });
+      return res.send({ message: "Nationality is Required" });
     }
     if(!Role){
-      res.send({message: "Role is required"});
+      return res.send({message: "Role is required"});
     }
     if (!Email) {
-      res.send({ message: "Email is Required" });
+      return res.send({ message: "Email is Required" });
     }
     if (!Password) {
-      res.send({ message: "Password is Required" });
+     return res.send({ message: "Password is Required" });
     }
-    console.log("data fetched")
+    // console.log("data fetched")
 
     const ExistingUser = await userModel.findOne({ Email });
     if (ExistingUser) {
-      res.status(201).send({
+      return res.status(201).send({
         success: false,
         message: "User Already Exists",
       });
@@ -51,13 +51,13 @@ export const RegisterController = async (req, res) => {
       Password: hashPassword,
     }).save();
 
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "User Registered Successfully",
       user,
     });
   } catch (error) {
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: "Error in Registration",
       error,

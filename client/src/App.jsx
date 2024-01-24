@@ -4,6 +4,10 @@ import Login from "./Pages/Login";
 import Verifyuser from "./Pages/Verifyuser";
 import Register from "./Pages/Register";
 import HomePage from "./Pages/HomePage";
+import { Flip, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { DNA } from "react-loader-spinner";
+import Spinner from "./Components/Spinner";
 
 
 function App() {
@@ -15,8 +19,22 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/verify" element={<Verifyuser/>}/>
+      <Route path="/spinner" element={<Spinner/>}/>
     </Routes>
+    <ToastContainer
+position="top-center"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </BrowserRouter>
+    
   )
 }
 
