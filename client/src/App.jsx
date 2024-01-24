@@ -1,13 +1,14 @@
 import {BrowserRouter,Route,Routes} from "react-router-dom";
 import LandingPage from "./Pages/LandingPage";
 import Login from "./Pages/Login";
+import ForgotPassword from "./Pages/ForgotPassword";
 import Verifyuser from "./Pages/Verifyuser";
 import Register from "./Pages/Register";
 import HomePage from "./Pages/HomePage";
 import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { DNA } from "react-loader-spinner";
 import Spinner from "./Components/Spinner";
+
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path="/home" element={<HomePage/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
+      <Route path="/forgotpassword" element={<ForgotPassword/>}/>
       <Route path="/verify" element={<Verifyuser/>}/>
       <Route path="/spinner" element={<Spinner/>}/>
     </Routes>
