@@ -7,13 +7,17 @@ import {
   verifyMailController,
   LoginController,
   testController,
+  forgotPasswordController
 } from "../controllers/authController.js";
 import { isTeacher, isVerified, requireSignIn } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/register", RegisterController);
+
 router.post("/login",isVerified, LoginController);
+
+router.post("/forgotpassword", forgotPasswordController);
 
 router.post("/sendotp", otpSendController);
 
