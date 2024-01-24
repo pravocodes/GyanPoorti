@@ -1,15 +1,22 @@
 import userModel from "../models/userModel.js";
-import { hashedPassword,comparePassword } from "../Helper/authHelper.js";
+import { hashedPassword, comparePassword } from "../Helper/authHelper.js";
 import fast2sms from "fast-two-sms";
 import nodemailer from "nodemailer";
-import  Jwt from "jsonwebtoken";
+import Jwt from "jsonwebtoken";
 
 export const RegisterController = async (req, res) => {
   //firstname //lastname //email //phonenumber //state //country //
 
   try {
-    const { FirstName, LastName, PhoneNumber, Nationality,Role, Email, Password } =
-      req.body;
+    const {
+      FirstName,
+      LastName,
+      PhoneNumber,
+      Nationality,
+      Role,
+      Email,
+      Password,
+    } = req.body;
 
     if (!FirstName || !LastName) {
       return res.send({ message: "Name is Required" });
@@ -20,14 +27,14 @@ export const RegisterController = async (req, res) => {
     if (!Nationality) {
       return res.send({ message: "Nationality is Required" });
     }
-    if(!Role){
-      return res.send({message: "Role is required"});
+    if (!Role) {
+      return res.send({ message: "Role is required" });
     }
     if (!Email) {
       return res.send({ message: "Email is Required" });
     }
     if (!Password) {
-     return res.send({ message: "Password is Required" });
+      return res.send({ message: "Password is Required" });
     }
     // console.log("data fetched")
 
@@ -102,9 +109,8 @@ export const VerifyOTPController = async (req, res) => {
   try {
     const { PhoneNumber, OTP } = req.body;
     let user = await userModel.findOne({ PhoneNumber });
-    console.log(PhoneNumber,OTP)
+    console.log(PhoneNumber, OTP);
     if (!user || user.otp != OTP) {
-
       return res.send({
         success: false,
         message: "Invalid OTP or User not found",
@@ -160,7 +166,10 @@ export const mailSenderController = async (req, res) => {
           user.mailotp = mailotp;
           user.save();
         }
-        res.send("Email has been sent!");
+        res.send({
+          success: true,
+          message: "Email has been Sent",
+        });
       } catch (error) {
         res.send({
           success: false,
@@ -209,18 +218,19 @@ export const verifyMailController = async (req, res) => {
 
 //LOGIN API**************************************************************
 
-export const LoginController =async (req,res) =>{
+export const LoginController = async (req, res) => {
   try {
-    const {Email, Password} = req.body;
+    const { Email, Password } = req.body;
 
-    if(!Email || !Password) {
+    if (!Email || !Password) {
       return res.status(404).send({
         success: false,
-        message: 'Invalid Email or Password',
+        message: "Invalid Email or Password",
       });
     }
-    const user =await userModel.findOne({Email});
-    if(!user){
+
+    const user = await userModel.findOne({ Email });
+    if (!user) {
       return res.status(404).send({
         success: false,
         message: "Email is not registerd",
@@ -250,7 +260,6 @@ export const LoginController =async (req,res) =>{
       },
       token,
     });
-
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -260,7 +269,6 @@ export const LoginController =async (req,res) =>{
     });
   }
 };
-
 
 //Protected Route test
 

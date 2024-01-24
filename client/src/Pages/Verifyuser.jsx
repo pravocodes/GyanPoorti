@@ -9,9 +9,18 @@ import axios from 'axios';
 
 function Verifyuser() {
   const location = useLocation();
-  const { phone, email } = location.state;
-const [PhoneNumber,setPhoneNumber]=useState(phone);
+  
+  if(location.state == null){
+   var phone ="";
+   var email = "";
+  }
+  else{
+    var { phone, email } = location.state;
+  }
+    const [PhoneNumber,setPhoneNumber]=useState(phone);
 const [Email,setEmail]=useState(email);
+  
+
 const [Numberotp,setNumberotp]=useState("");
 const [Emailotp,setEmailotp]=useState("");
 
@@ -53,18 +62,43 @@ const [Emailotp,setEmailotp]=useState("");
       const [showOTPInput, setShowOTPInput] = useState(false);
       const enterOTP =  async (e) => {
         e.preventDefault();
+          
+          try {
+        const res=await axios.post("/api/v1/auth/sendmail",{
+          Email,
+        })
+        if(res && res.data && res.data.success){
+          alert('OTP sent to your Email');
           setShowOTPInput(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
         };
         const handleSubmitOTP =async (e) => {
           e.preventDefault();
-          console.log('OTP submitted');
+          const requestData={
+          Email: Email,
+          OTP: Emailotp,
+        }
+        try {
+          console.log(Email,Emailotp);
+          const res=await axios.post("/api/v1/auth/verifymail",requestData)
+          if(res && res.data && res.data.success){
+            alert('OTP verified');
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        
+        console.log('OTP submitted');
         };
 
   return (
     <div className={styles.verifyusercontainer}>
       <h1>Verify Yourself !</h1>
-      <input type="text" placeholder='Phone Number' value={PhoneNumber} />
-      <button type='text' onClick={enterOTPnum} >Send Otp</button>
+      <input type="text" placeholder='Phone Number' value={PhoneNumber} onChange={(e)=>{setPhoneNumber(e.target.value)}} />
+      <button type='text' onClick={enterOTPnum}  >Send Otp</button>
       {showOTPInputnum && (
           <div>
             <input type="text" name="otp" placeholder="Enter OTP" value={Numberotp} onChange={(e)=>setNumberotp(e.target.value)} required />
@@ -72,7 +106,7 @@ const [Emailotp,setEmailotp]=useState("");
           </div>
         )}
 
-<input type="text" placeholder='Email' value={Email} />
+<input type="text" placeholder='Email' value={Email} onChange={(e)=>{setEmail(e.target.value)}} />
       <button type='text' onClick={enterOTP}>Send Otp</button>
       {showOTPInput && (
           <div>

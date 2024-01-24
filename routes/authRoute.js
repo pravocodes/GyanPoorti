@@ -8,12 +8,16 @@ import {
   LoginController,
   testController,
 } from "../controllers/authController.js";
-import { isTeacher, isVerified, requireSignIn } from "../middleware/authMiddleware.js";
+import {
+  isTeacher,
+  isVerified,
+  requireSignIn,
+} from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/register", RegisterController);
-router.post("/login",isVerified, LoginController);
+router.post("/login", isVerified, LoginController);
 
 router.post("/sendotp", otpSendController);
 
@@ -25,10 +29,10 @@ router.post("/verifymail", verifyMailController);
 
 router.post("/test", requireSignIn, isTeacher, testController);
 
-router.get("/student-auth",requireSignIn,(req,res)=>{
-  res.status(200).send({ok:true});
-})
-router.get("/teacher-auth", requireSignIn,isTeacher, (req, res) => {
+router.get("/student-auth", requireSignIn, (req, res) => {
+  res.status(200).send({ ok: true });
+});
+router.get("/teacher-auth", requireSignIn, isTeacher, (req, res) => {
   res.status(200).send({ ok: true });
 });
 

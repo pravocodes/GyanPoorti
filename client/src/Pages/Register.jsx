@@ -12,7 +12,7 @@ const [firstname,setFirstname]=useState("");
 const [lastname,setLastname]=useState("");
 const [phonenumber,setPhonenumber]=useState("");
 const [nationality,setNationality]=useState("Indian");
-const [role,setRole]=useState("Teacher");
+const [role,setRole]=useState("Student");
 const [email,setEmail]=useState("");
 const [password,setPassword] = useState("");
 
