@@ -25,4 +25,11 @@ router.post("/verifymail", verifyMailController);
 
 router.post("/test", requireSignIn, isTeacher, testController);
 
+router.get("/student-auth",requireSignIn,(req,res)=>{
+  res.status(200).send({ok:true});
+})
+router.get("/teacher-auth", requireSignIn,isTeacher, (req, res) => {
+  res.status(200).send({ ok: true });
+});
+
 export default router;
