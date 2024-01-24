@@ -3,7 +3,7 @@ import styles from "./Register.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 
 
 //firstname /lastname/ phone number /nationality/ email /password
@@ -32,6 +32,7 @@ const handleSubmit= async(e)=> {
     try {
       const res =await axios.post("/api/v1/auth/register", requestData)
     if(res && res.data && res.data.success){
+      toast.success(res.data && res.data.message);
       navigate("/verify",{
       state: {
         phone: phonenumber,
@@ -39,13 +40,16 @@ const handleSubmit= async(e)=> {
       },
     });
     }
+
+
     else{
-      console.log(res.data.message);
+      toast.error(res.data.message);
     }
 
       
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
     }
 }
 

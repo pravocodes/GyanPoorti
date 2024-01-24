@@ -3,6 +3,7 @@ import styles from "./Login.module.css";
 import { useNavigate,useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../Context/Auth';
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [Email, setEmail] = useState("");
@@ -17,6 +18,7 @@ const Login = () => {
     try {
       const res= await axios.post("/api/v1/auth/login", {Email,Password});
       if(res && res.data && res.data.success){
+        toast.success(res.data && res.data.message);
         localStorage.setItem("auth",JSON.stringify(res.data));
         setAuth({
           ...auth,
@@ -24,10 +26,13 @@ const Login = () => {
           token:res.data.token
         })
         navigate(location.storage || '/home');
+      }else {
+        toast.error(res.data.message);
       }
       
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
     }
   }
 
