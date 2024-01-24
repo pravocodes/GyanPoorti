@@ -7,6 +7,7 @@ import {
   verifyMailController,
   LoginController,
   testController,
+  forgotPasswordController
 } from "../controllers/authController.js";
 import {
   isTeacher,
@@ -17,7 +18,10 @@ import {
 const router = express.Router();
 
 router.post("/register", RegisterController);
-router.post("/login", isVerified, LoginController);
+
+router.post("/login",isVerified, LoginController);
+
+router.post("/forgotpassword", forgotPasswordController);
 
 router.post("/sendotp", otpSendController);
 
