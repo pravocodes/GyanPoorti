@@ -26,7 +26,7 @@ const Login = () => {
           user: res.data.user,
           token: res.data.token,
         });
-        navigate(location.storage || '/home');
+        navigate(location.storage || '/dashboard');
       } else {
         toast.error(res.response.data.message);
       }

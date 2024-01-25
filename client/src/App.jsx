@@ -8,7 +8,8 @@ import HomePage from "./Pages/HomePage";
 import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from "./Components/Spinner";
-
+import Teacher from "./Route/TeacherRoute"
+import Profile from "./Pages/Teacher/Profile";
 
 
 function App() {
@@ -16,9 +17,13 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<LandingPage/>}/>
-      <Route path="/home" element={<HomePage/>}/>
+      
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
+      <Route path="/dashboard" element = {<Teacher/>}>
+        <Route path="" element={<HomePage/>}/>
+        <Route path="/dashboard/profile" element = {<Profile/>}/>
+      </Route>
       <Route path="/forgotpassword" element={<ForgotPassword/>}/>
       <Route path="/verify" element={<Verifyuser/>}/>
       <Route path="/spinner" element={<Spinner/>}/>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../Context/Auth";
 import { Outlet } from "react-router-dom";
-import {Spinner} from "../Components/Spinner"
+import Spinner from "../Components/Spinner"
 import axios from "axios";
 
 export default function TeacherRoute(){
