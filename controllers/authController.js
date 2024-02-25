@@ -1,5 +1,6 @@
 import userModel from "../models/userModel.js";
 import { hashedPassword, comparePassword } from "../Helper/authHelper.js";
+import ProfileModel from "../models/teacherProfileModel.js";
 import fast2sms from "fast-two-sms";
 import nodemailer from "nodemailer";
 import Jwt from "jsonwebtoken";
@@ -233,7 +234,7 @@ export const LoginController = async (req, res) => {
     if (!user) {
       return res.status(404).send({
         success: false,
-        message: "Email is not registerd",
+        message: "Email is not registered",
       });
     }
     const match = await comparePassword(Password, user.Password);
@@ -243,12 +244,20 @@ export const LoginController = async (req, res) => {
         message: "Invalid Password",
       });
     }
+
+    let profile = await ProfileModel.findOne({ user: user._id });
+    if (!profile) {
+      // If not, create a new profile
+      profile = new ProfileModel({ user: user._id });
+      await profile.save();
+    }
+
     const token = await Jwt.sign({ _id: user._id }, process.env.JWT_SECRETKEY, {
       expiresIn: "7d",
     });
     res.status(200).send({
       success: true,
-      message: "login successfully",
+      message: "Login successfully",
       user: {
         _id: user._id,
         fname: user.FirstName,
