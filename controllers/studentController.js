@@ -2,7 +2,8 @@ import teacherProfileModel from "../models/teacherProfileModel.js";
 
 export const chooseTeacherController = async (req, res) => {
   try {
-    const { studentId, teacherId } = req.body;
+    const { studentId } = req.user._id;
+    const { teacherId } = req.body;
 
     const teacherProfile = await teacherProfileModel.findOne({
       user: teacherId,

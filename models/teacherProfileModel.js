@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ProfileModel = new mongoose.Schema({
+const TeacherProfileModel = new mongoose.Schema({
   user: { type: mongoose.Types.ObjectId, ref: "User" },
   Gender: {
     type: String,
@@ -30,4 +30,4 @@ const ProfileModel = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("profile", ProfileModel);
+export default mongoose.model("teacher-profile", TeacherProfileModel);
